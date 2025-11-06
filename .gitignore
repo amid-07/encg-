@@ -1,0 +1,5 @@
+# Dépendances
+/backend/node_modules
+
+# Fichiers d'environnement (si vous en avez)
+.env

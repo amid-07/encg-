@@ -1,0 +1,25 @@
+:root {
+    --bs-primary-rgb: 13, 110, 253;
+    --bs-secondary-rgb: 108, 117, 125;
+    --custom-blue: #005a9e;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #F8F9FA;
+}
+
+.card-title {
+    color: var(--custom-blue);
+    font-weight: 600;
+}
+
+.btn-primary {
+    background-color: var(--custom-blue);
+    border-color: var(--custom-blue);
+}
+
+.btn-primary:hover {
+    background-color: #004175;
+    border-color: #004175;
+}

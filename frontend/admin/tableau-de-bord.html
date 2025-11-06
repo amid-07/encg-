@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Tableau de Bord Admin</title>
+    <link rel="stylesheet" href="css/style-admin.css">
+</head>
+<body>
+    <header>
+        <h1>Panneau d'Administration</h1>
+    </header>
+    <main class="container">
+        <section class="form-section">
+            <h2>Créer une nouvelle annonce</h2>
+            <form id="create-annonce-form">
+                <div class="form-group">
+                    <label for="titre">Titre</label>
+                    <input type="text" id="titre" required>
+                </div>
+                <div class="form-group">
+                    <label for="contenu">Contenu</label>
+                    <textarea id="contenu" rows="5" required></textarea>
+                </div>
+                 <div class="form-group">
+                    <label for="filiere">Pour la filière :</label>
+                    <select id="filiere">
+                        <option value="tous">Toutes les filières</option>
+                        <option value="informatique">Informatique</option>
+                        <option value="gestion">Gestion</option>
+                        <option value="mecanique">Mécanique</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="groupe">Pour le groupe :</label>
+                    <select id="groupe">
+                        <option value="tous">Tous les groupes</option>
+                        <option value="A">Groupe A</option>
+                        <option value="B">Groupe B</option>
+                        <option value="C">Groupe C</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Publier l'annonce</button>
+                 <p id="form-message"></p>
+            </form>
+        </section>
+    </main>
+    <script src="js/admin.js"></script>
+</body>
+</html>
