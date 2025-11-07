@@ -1,25 +1,102 @@
 :root {
-    --bs-primary-rgb: 13, 110, 253;
-    --bs-secondary-rgb: 108, 117, 125;
-    --custom-blue: #005a9e;
+    --primary-color: #007BFF;
+    --secondary-color: #6c757d;
+    --accent-color: #FFC107;
+    --text-color: #333;
+    --background-color: #f4f7f6;
+    --light-gray: #e9ecef;
+    --white: #fff;
+    --shadow-sm: 0 .125rem .25rem rgba(0,0,0,.075);
+    --shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    --shadow-lg: 0 1rem 3rem rgba(0,0,0,.175);
+    --border-radius: .375rem;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #F8F9FA;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.card {
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
 }
 
 .card-title {
-    color: var(--custom-blue);
+    color: var(--primary-color);
     font-weight: 600;
 }
 
 .btn-primary {
-    background-color: var(--custom-blue);
-    border-color: var(--custom-blue);
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    border-radius: var(--border-radius);
+    padding: .75rem 1.25rem;
+    font-weight: 500;
+    transition: all .2s ease-in-out;
 }
 
 .btn-primary:hover {
-    background-color: #004175;
-    border-color: #004175;
+    background-color: #0069d9;
+    border-color: #0062cc;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-outline-secondary {
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+    border-radius: var(--border-radius);
+    padding: .75rem 1.25rem;
+    font-weight: 500;
+    transition: all .2s ease-in-out;
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.form-control {
+    border-radius: var(--border-radius);
+    padding: .75rem 1rem;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 .25rem rgba(0, 123, 255, .25);
+}
+
+.navbar {
+    background-color: var(--white) !important;
+    box-shadow: var(--shadow-sm);
+}
+
+.navbar-brand {
+    color: var(--primary-color) !important;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    color: var(--text-color) !important;
+    font-weight: 500;
+    transition: color .15s ease-in-out;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--primary-color) !important;
+}
+
+#logout-btn, #logout-btn-cours, #logout-btn-journal {
+    color: var(--primary-color) !important;
+    font-weight: 500;
+}
+
+#logout-btn:hover, #logout-btn-cours:hover, #logout-btn-journal:hover {
+    color: #0056b3 !important;
 }
