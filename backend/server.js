@@ -20,10 +20,14 @@ mongoose.connect(MONGO_URI)
     .catch(err => console.error('Erreur de connexion à MongoDB:', err));
 
 // --- Middlewares ---
-// Autorise les requêtes depuis d'autres origines (votre frontend sur Vercel)
-app.use(cors()); 
-// Permet à Express de comprendre le format JSON dans le corps des requêtes
-app.use(express.json());
+// ** MODIFICATION IMPORTANTE POUR CORS EN PRODUCTION **
+// On configure CORS pour autoriser spécifiquement l'URL de votre frontend Vercel.
+const corsOptions = {
+    origin: 'https://encg.vercel.app' // Remplacez par l'URL exacte de votre site Vercel
+  };
+  app.use(cors(corsOptions));
+  
+  app.use(express.json());
 
 // --- Routes de l'API ---
 // Importation des fichiers de routes
