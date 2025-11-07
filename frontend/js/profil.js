@@ -19,18 +19,14 @@ window.addEventListener('load', () => {
         creationCoursSection.style.display = 'block';
     }
 
-    // --- 3. Logique des groupes dynamiques pour le formulaire d'annonces ---
+    // --- 3. Logique des groupes dynamiques pour les annonces ---
     const filiereAnnonceSelect = document.getElementById('filiere-annonce');
     const groupeAnnonceSelect = document.getElementById('groupe-annonce');
-    const groupesParFiliere = {
-        'Gestion': ['GA', 'GB', 'GC', 'GD'],
-        'Commerce': ['GA', 'GB']
-    };
+    const groupesParFiliere = { 'Gestion': ['GA', 'GB', 'GC', 'GD'], 'Commerce': ['GA', 'GB'] };
 
     filiereAnnonceSelect.addEventListener('change', function() {
         const filiereChoisie = this.value;
         groupeAnnonceSelect.innerHTML = '<option value="tous">Tous les groupes</option>';
-
         if (filiereChoisie !== 'tous' && groupesParFiliere[filiereChoisie]) {
             groupeAnnonceSelect.disabled = false;
             groupesParFiliere[filiereChoisie].forEach(groupe => {
@@ -62,7 +58,7 @@ window.addEventListener('load', () => {
                 roleDemandeur: userRole
             };
             try {
-                const response = await fetch('http://localhost:3000/api/annonces/creer', {
+                const response = await fetch('/api/annonces/creer', { // URL relative
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(annonceData)
@@ -70,15 +66,15 @@ window.addEventListener('load', () => {
                 const result = await response.json();
                 if (response.ok) {
                     messageElement.textContent = 'Annonce publiée ! Redirection...';
-                    messageElement.className = 'text-success';
+                    messageElement.style.color = 'green';
                     setTimeout(() => { window.location.href = 'journal.html'; }, 2000);
                 } else {
                     messageElement.textContent = `Erreur: ${result.message}`;
-                    messageElement.className = 'text-danger';
+                    messageElement.style.color = 'red';
                 }
             } catch (err) {
                 messageElement.textContent = 'Erreur de connexion au serveur.';
-                messageElement.className = 'text-danger';
+                messageElement.style.color = 'red';
             }
         });
     }
@@ -91,32 +87,37 @@ window.addEventListener('load', () => {
             const messageElement = document.getElementById('form-cours-message');
             const coursData = {
                 titre: document.getElementById('titre-cours').value,
-                module: document.getElementById('module-cours').value,
                 description: document.getElementById('description-cours').value,
                 lien: document.getElementById('lien-cours').value,
                 filiere: document.getElementById('filiere-cours').value,
+                module: document.getElementById('module-cours').value,
                 auteur: userName,
                 auteurId: userId,
                 roleDemandeur: userRole
             };
+            if (!coursData.module) {
+                messageElement.textContent = "Veuillez sélectionner un module.";
+                messageElement.style.color = 'red';
+                return;
+            }
             try {
-                const response = await fetch('http://localhost:3000/api/cours/creer', {
+                const response = await fetch('/api/cours/creer', { // URL relative
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(coursData)
                 });
                 const result = await response.json();
                 if (response.ok) {
-                    messageElement.textContent = 'Cours partagé ! Redirection...';
-                    messageElement.className = 'text-success';
+                    messageElement.textContent = 'Ressource partagée ! Redirection...';
+                    messageElement.style.color = 'green';
                     setTimeout(() => { window.location.href = 'cours.html'; }, 2000);
                 } else {
                     messageElement.textContent = `Erreur: ${result.message}`;
-                    messageElement.className = 'text-danger';
+                    messageElement.style.color = 'red';
                 }
             } catch (err) {
                 messageElement.textContent = 'Erreur de connexion au serveur.';
-                messageElement.className = 'text-danger';
+                messageElement.style.color = 'red';
             }
         });
     }

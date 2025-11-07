@@ -7,11 +7,7 @@ window.addEventListener('load', async function() {
     const userId = localStorage.getItem('userId');
     const userName = localStorage.getItem('userName');
     const userRole = localStorage.getItem('userRole');
-
-    if (!userId || !userName || !userRole) {
-        window.location.href = 'connexion.html';
-        return;
-    }
+    if (!userId || !userName || !userRole) { window.location.href = 'connexion.html'; return; }
 
     document.getElementById('user-info').textContent = `Connecté en tant que: ${userName}`;
     document.getElementById('logout-btn-journal').addEventListener('click', (event) => {
@@ -23,7 +19,7 @@ window.addEventListener('load', async function() {
     // --- 2. Charger et afficher les annonces ---
     const container = document.getElementById('annonces-container');
     try {
-        const response = await fetch('http://localhost:3000/api/annonces');
+        const response = await fetch('/api/annonces'); // URL relative
         const annonces = await response.json();
         container.innerHTML = '';
 
@@ -33,28 +29,25 @@ window.addEventListener('load', async function() {
         }
 
         annonces.forEach(annonce => {
-            const annonceCard = document.createElement('div');
-            annonceCard.className = 'card shadow-sm mb-4';
-            annonceCard.setAttribute('data-annonce-id', annonce._id);
-
+            const annonceDiv = document.createElement('div');
+            annonceDiv.className = 'annonce';
+            annonceDiv.setAttribute('data-annonce-id', annonce._id);
+            
             let deleteButtonHTML = '';
             if (userRole === 'admin' || userId === annonce.auteurId) {
-                deleteButtonHTML = `<button class="btn btn-danger btn-sm float-end" data-id="${annonce._id}">Supprimer</button>`;
+                deleteButtonHTML = `<button class="btn-delete" data-id="${annonce._id}">Supprimer</button>`;
             }
 
-            const cible = `Section ${annonce.section || 'tous'} - ${annonce.filiere || 'tous'} - Groupe ${annonce.groupe || 'tous'}`;
-            const date = new Date(annonce.date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
-
-            annonceCard.innerHTML = `
-                <div class="card-body">
-                    <h5 class="card-title">${annonce.titre}</h5>
-                    <p class="card-text">${annonce.contenu}</p>
-                    <p class="card-text"><small class="text-muted">Publié par: ${annonce.auteur || 'Auteur inconnu'} | ${date}</small></p>
-                    <p class="card-text"><small class="text-muted">Cible: ${cible}</small></p>
+            const cible = `Pour: Section ${annonce.section || 'tous'} - ${annonce.filiere || 'tous'} - Groupe ${annonce.groupe || 'tous'}`;
+            annonceDiv.innerHTML = `
+                <div class="annonce-header">
+                    <h3>${annonce.titre}</h3>
                     ${deleteButtonHTML}
                 </div>
+                <p>${annonce.contenu}</p>
+                <p><small>Publié par: ${annonce.auteur || 'Auteur inconnu'} | ${cible}</small></p>
             `;
-            container.appendChild(annonceCard);
+            container.appendChild(annonceDiv);
         });
     } catch (error) {
         container.innerHTML = '<p>Impossible de charger les annonces. Erreur du serveur.</p>';
@@ -62,11 +55,11 @@ window.addEventListener('load', async function() {
 
     // --- 3. Gérer les clics sur les boutons Supprimer ---
     container.addEventListener('click', async (event) => {
-        if (event.target.classList.contains('btn-danger')) {
+        if (event.target.classList.contains('btn-delete')) {
             const annonceId = event.target.getAttribute('data-id');
             if (confirm("Êtes-vous sûr de vouloir supprimer cette annonce ?")) {
                 try {
-                    const response = await fetch(`http://localhost:3000/api/annonces/${annonceId}`, {
+                    const response = await fetch(`/api/annonces/${annonceId}`, { // URL relative
                         method: 'DELETE',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ userId: userId, userRole: userRole })
