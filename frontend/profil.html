@@ -1,112 +1,276 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Profil - ENCG Plateforme</title>
-    <link rel="stylesheet" href="css/new-style.css">
-</head>
-<body>
-    <header class="page-header">
-        <div class="container">
-            <span id="welcome-message">Chargement...</span>
-            <nav>
-                <a href="journal.html">Annonces</a>
-                <a href="cours.html">Cours</a>
-                <a href="#" id="logout-btn">Déconnexion</a>
-            </nav>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mon Profil - ENCG-PLATEFORME</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/new-style.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg shadow-sm">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">ENCG-PLATEFORME</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="journal.html">Annonces</a>
+            </li>
+            <li class="nav-item">
+              <a href="classement.html">Classement</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cours.html">Cours</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="profil.html">Mon Profil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="logout-btn">Déconnexion</a>
+            </li>
+          </ul>
         </div>
-    </header>
+      </div>
+    </nav>
 
-    <main class="container">
-        <h2>Mon Profil</h2>
-        
-        <!-- Bouton pour accéder au panneau d'approbation, caché par défaut -->
-        <div id="panneau-moderateur" style="display: none; margin-bottom: 2rem;">
-            <a href="approbation.html" class="btn">Panneau d'approbation</a>
+    <div class="container my-5">
+      <div class="row">
+        <!-- Profile Sidebar / Tab Navigation -->
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body text-center">
+              <h5 class="card-title" id="user-name-display">Chargement...</h5>
+              <p class="card-text text-muted" id="user-role-display">
+                Chargement...
+              </p>
+            </div>
+            <div
+              class="list-group list-group-flush"
+              id="profile-tabs"
+              role="tablist"
+            >
+              <a
+                class="list-group-item list-group-item-action"
+                id="tab-partager-cours"
+                data-bs-toggle="list"
+                href="#content-partager-cours"
+                role="tab"
+                >Partager un cours</a
+              >
+              <a
+                class="list-group-item list-group-item-action"
+                id="tab-publier-annonce"
+                data-bs-toggle="list"
+                href="#content-publier-annonce"
+                role="tab"
+                style="display: none"
+                >Publier une annonce</a
+              >
+              <a
+                href="approbation.html"
+                class="list-group-item list-group-item-action"
+                id="panneau-moderateur"
+                style="display: none"
+                >Panneau d'approbation</a
+              >
+            </div>
+          </div>
         </div>
 
-        <!-- Section pour publier une annonce, cachée par défaut -->
-        <section id="creation-annonce-section" style="display: none; padding-bottom: 20px; border-bottom: 2px solid #e9ecef; margin-bottom: 2rem;">
-            <h3>Publier une nouvelle annonce</h3>
-            <form id="create-annonce-form">
-                 <div class="form-group">
-                     <label for="titre-annonce">Titre</label>
-                     <input type="text" id="titre-annonce" required>
+        <!-- Main Content / Tab Panes -->
+        <div class="col-md-8">
+          <div class="tab-content" id="nav-tabContent">
+            <!-- Share Course/Resource Pane -->
+            <div
+              class="tab-pane fade"
+              id="content-partager-cours"
+              role="tabpanel"
+            >
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="mb-0">Partager un nouveau cours / ressource</h4>
                 </div>
-                 <div class="form-group">
-                     <label for="contenu-annonce">Contenu</label>
-                     <textarea id="contenu-annonce" rows="4" required></textarea>
+                <div class="card-body">
+                  <p class="text-muted">
+                    <small
+                      >Note : Les ressources partagées par les étudiants doivent
+                      être approuvées par un modérateur.</small
+                    >
+                  </p>
+                  <form id="create-cours-form">
+                    <!-- Form content is unchanged, only the wrapper is different -->
+                    <div class="mb-3">
+                      <label for="titre-cours" class="form-label"
+                        >Titre de la ressource</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="titre-cours"
+                        required
+                      />
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <label for="module-cours" class="form-label"
+                          >Module concerné</label
+                        >
+                        <select class="form-select" id="module-cours" required>
+                          <option value="" disabled selected>
+                            Choisir un module...
+                          </option>
+                          <option value="GP">GP</option>
+                          <option value="GBT">GBT</option>
+                          <option value="SCM">SCM</option>
+                          <option value="INFO">INFO</option>
+                          <option value="GRH">GRH</option>
+                          <option value="Statistiques">Statistiques</option>
+                          <option value="Autre">Autre</option>
+                        </select>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <label for="filiere-cours" class="form-label"
+                          >Pour la filière</label
+                        >
+                        <select class="form-select" id="filiere-cours">
+                          <option value="Gestion">Gestion</option>
+                          <option value="Commerce">Commerce</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="description-cours" class="form-label"
+                        >Brève description (optionnel)</label
+                      >
+                      <textarea
+                        class="form-control"
+                        id="description-cours"
+                        rows="3"
+                      ></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label for="lien-cours" class="form-label"
+                        >Lien (Google Drive, etc.)</label
+                      >
+                      <input
+                        type="url"
+                        class="form-control"
+                        id="lien-cours"
+                        placeholder="https://..."
+                        required
+                      />
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                      Partager la ressource
+                    </button>
+                    <p id="form-cours-message" class="mt-3"></p>
+                  </form>
                 </div>
-                 <div class="form-group">
-                     <label for="section-annonce">Cibler la Section :</label>
-                     <select id="section-annonce">
-                         <option value="tous">Toutes les sections</option>
-                         <option value="A">Section A</option>
-                         <option value="B">Section B</option>
-                    </select>
-                </div>
-                 <div class="form-group">
-                     <label for="filiere-annonce">Cibler la Filière :</label>
-                     <select id="filiere-annonce">
-                         <option value="tous">Toutes les filières</option>
-                         <option value="Gestion">Gestion</option>
-                         <option value="Commerce">Commerce</option>
-                    </select>
-                </div>
-                 <div class="form-group">
-                     <label for="groupe-annonce">Cibler le Groupe :</label>
-                     <select id="groupe-annonce" disabled>
-                         <option value="tous">D'abord choisir une filière...</option>
-                    </select>
-                </div>
-                 <button type="submit" class="btn">Publier l'annonce</button>
-                 <p id="form-annonce-message"></p>
-            </form>
-        </section>
+              </div>
+            </div>
 
-        <!-- Section pour partager un cours, visible par tous -->
-        <section id="creation-cours-section">
-            <h3>Partager un nouveau cours / ressource</h3>
-            <p><small>Note : Les ressources partagées par les étudiants doivent être approuvées par un modérateur.</small></p>
-            <form id="create-cours-form">
-                <div class="form-group">
-                    <label for="titre-cours">Titre de la ressource</label>
-                    <input type="text" id="titre-cours" required>
+            <!-- Create Announcement Pane -->
+            <div
+              class="tab-pane fade"
+              id="content-publier-annonce"
+              role="tabpanel"
+            >
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="mb-0">Publier une nouvelle annonce</h4>
                 </div>
-                <div class="form-group">
-                    <label for="module-cours">Module concerné</label>
-                    <select id="module-cours" required>
-                        <option value="" disabled selected>Choisir un module...</option>
-                        <option value="GP">GP</option>
-                        <option value="GBT">GBT</option>
-                        <option value="SCM">SCM</option>
-                        <option value="INFO">INFO</option>
-                        <option value="GRH">GRH</option>
-                        <option value="Statistiques">Statistiques</option>
-                        <option value="Autre">Autre</option>
-                    </select>
+                <div class="card-body">
+                  <form id="create-annonce-form">
+                    <!-- Form content is unchanged, only the wrapper is different -->
+                    <div class="mb-3">
+                      <label for="titre-annonce" class="form-label"
+                        >Titre</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="titre-annonce"
+                        required
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label for="contenu-annonce" class="form-label"
+                        >Contenu</label
+                      >
+                      <textarea
+                        class="form-control"
+                        id="contenu-annonce"
+                        rows="4"
+                        required
+                      ></textarea>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4 mb-3">
+                        <label for="section-annonce" class="form-label"
+                          >Section</label
+                        >
+                        <select class="form-select" id="section-annonce">
+                          <option value="tous">Toutes</option>
+                          <option value="A">Section A</option>
+                          <option value="B">Section B</option>
+                        </select>
+                      </div>
+                      <div class="col-md-4 mb-3">
+                        <label for="filiere-annonce" class="form-label"
+                          >Filière</label
+                        >
+                        <select class="form-select" id="filiere-annonce">
+                          <option value="tous">Toutes</option>
+                          <option value="Gestion">Gestion</option>
+                          <option value="Commerce">Commerce</option>
+                        </select>
+                      </div>
+                      <div class="col-md-4 mb-3">
+                        <label for="groupe-annonce" class="form-label"
+                          >Groupe</label
+                        >
+                        <select
+                          class="form-select"
+                          id="groupe-annonce"
+                          disabled
+                        >
+                          <option value="tous">Choisir filière...</option>
+                        </select>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                      Publier l'annonce
+                    </button>
+                    <p id="form-annonce-message" class="mt-3"></p>
+                  </form>
                 </div>
-                <div class="form-group">
-                    <label for="description-cours">Brève description (optionnel)</label>
-                    <textarea id="description-cours" rows="3"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="lien-cours">Lien (Google Drive, Dropbox, etc.)</label>
-                    <input type="url" id="lien-cours" placeholder="https://..." required>
-                </div>
-                <div class="form-group">
-                    <label for="filiere-cours">Pour la filière :</label>
-                    <select id="filiere-cours">
-                        <option value="Gestion">Gestion</option>
-                        <option value="Commerce">Commerce</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn">Partager la ressource</button>
-                 <p id="form-cours-message"></p>
-            </form>
-        </section>
-    </main>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/profil.js"></script>
-</body>
+  </body>
 </html>

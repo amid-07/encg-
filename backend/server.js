@@ -34,7 +34,7 @@ const corsOptions = {
 const userRoutes = require('./routes/utilisateurs');
 const annonceRoutes = require('./routes/annonces');
 const coursRoutes = require('./routes/cours');
-
+const classementRoutes = require('./routes/classement');
 // Attribution des routes à leurs chemins de base
 // Toute requête vers /api/utilisateurs/* sera gérée par userRoutes
 app.use('/api/utilisateurs', userRoutes);
@@ -42,7 +42,7 @@ app.use('/api/utilisateurs', userRoutes);
 app.use('/api/annonces', annonceRoutes);
 // Toute requête vers /api/cours/* sera gérée par coursRoutes
 app.use('/api/cours', coursRoutes);
-
+app.use('/api/classement', classementRoutes);
 // Route de test pour vérifier que le serveur fonctionne
 app.get('/api', (req, res) => {
   res.send('API du Journal Scolaire est en ligne !');
