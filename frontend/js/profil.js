@@ -10,16 +10,17 @@ window.addEventListener('load', () => {
     if (!userId || !userName || !userRole) { window.location.href = 'connexion.html'; return; }
     document.getElementById('welcome-message').textContent = `Bienvenue, ${userName} (${userRole})`;
 
-    // --- 2. Affichage conditionnel des sections ---
+    // --- 2. Affichage conditionnel des sections pour les modérateurs ---
     const creationAnnonceSection = document.getElementById('creation-annonce-section');
-    const creationCoursSection = document.getElementById('creation-cours-section');
-    const rolesAutorises = ['prof', 'delegue', 'admin'];
-    if (rolesAutorises.includes(userRole)) {
+    const panneauModerateur = document.getElementById('panneau-moderateur');
+    const rolesModerateurs = ['prof', 'delegue', 'admin'];
+
+    if (rolesModerateurs.includes(userRole)) {
         creationAnnonceSection.style.display = 'block';
-        creationCoursSection.style.display = 'block';
+        panneauModerateur.style.display = 'block';
     }
 
-    // --- 3. Logique des groupes dynamiques pour les annonces ---
+    // --- 3. Logique des groupes dynamiques pour le formulaire d'annonces ---
     const filiereAnnonceSelect = document.getElementById('filiere-annonce');
     const groupeAnnonceSelect = document.getElementById('groupe-annonce');
     const groupesParFiliere = { 'Gestion': ['GA', 'GB', 'GC', 'GD'], 'Commerce': ['GA', 'GB'] };
@@ -58,7 +59,7 @@ window.addEventListener('load', () => {
                 roleDemandeur: userRole
             };
             try {
-                const response = await fetch('/api/annonces/creer', { // URL relative
+                const response = await fetch('/api/annonces/creer', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(annonceData)
@@ -101,16 +102,20 @@ window.addEventListener('load', () => {
                 return;
             }
             try {
-                const response = await fetch('/api/cours/creer', { // URL relative
+                const response = await fetch('/api/cours/creer', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(coursData)
                 });
                 const result = await response.json();
                 if (response.ok) {
-                    messageElement.textContent = 'Ressource partagée ! Redirection...';
+                    let successMessage = 'Ressource partagée avec succès !';
+                    if (userRole === 'etudiant') {
+                        successMessage = 'Ressource soumise pour approbation !';
+                    }
+                    messageElement.textContent = successMessage;
                     messageElement.style.color = 'green';
-                    setTimeout(() => { window.location.href = 'cours.html'; }, 2000);
+                    coursForm.reset();
                 } else {
                     messageElement.textContent = `Erreur: ${result.message}`;
                     messageElement.style.color = 'red';
