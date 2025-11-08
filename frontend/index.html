@@ -6,14 +6,17 @@
     <title>Bienvenue sur ENCG-PLATEFORME</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/new-style.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-        <div class="container-fluid">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg shadow-sm">
+        <div class="container">
             <a class="navbar-brand" href="#">ENCG-PLATEFORME</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -31,27 +34,53 @@
         </div>
     </nav>
 
-    <div class="container my-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card text-center p-5">
-                    <div class="card-body">
-                        <h1 class="card-title mb-4">Bienvenue sur ENCG-PLATEFORME</h1>
-                        <p class="card-text lead mb-4">
-                            Votre espace numérique pour accéder aux annonces, partager des cours et collaborer avec la communauté de l'ENCG.
-                        </p>
-                        <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
-                            <a href="inscription.html" class="btn btn-primary btn-lg px-4">Créer un compte</a>
-                            <a href="connexion.html" class="btn btn-outline-secondary btn-lg px-4">Se connecter</a>
-                        </div>
-                        <div class="mt-5">
-                            <a href="/admin/connexion.html" class="text-muted small">Accès Administrateur</a>
-                        </div>
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="container">
+            <h1 class="display-3">Votre Espace Numérique Étudiant</h1>
+            <p class="lead">Accédez aux annonces, partagez des cours et collaborez avec la communauté de l'ENCG.</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="inscription.html" class="btn btn-primary btn-lg">Commencer</a>
+                <a href="connexion.html" class="btn btn-secondary btn-lg">Se connecter</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-megaphone-fill feature-icon"></i>
+                        <h3>Annonces en Temps Réel</h3>
+                        <p>Restez informé des dernières nouvelles et des événements importants de votre école.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-book-half feature-icon"></i>
+                        <h3>Partage de Cours</h3>
+                        <p>Accédez et contribuez à une bibliothèque de ressources pédagogiques partagées par les étudiants.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-people-fill feature-icon"></i>
+                        <h3>Communauté Active</h3>
+                        <p>Échangez avec vos camarades, posez des questions et collaborez sur des projets.</p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 mt-auto">
+        <div class="container text-center">
+            <a href="/admin/connexion.html" class="text-muted small">Accès Administrateur</a>
+        </div>
+    </footer>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
