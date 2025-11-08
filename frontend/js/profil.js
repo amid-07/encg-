@@ -1,13 +1,14 @@
+// ===================================================================
+// FICHIER COMPLET FINAL : frontend/js/profil.js
+// ===================================================================
+
 window.addEventListener('load', () => {
     // --- 1. Gestion de l'utilisateur ---
     const userId = localStorage.getItem('userId');
     const userName = localStorage.getItem('userName');
     const userRole = localStorage.getItem('userRole');
     if (!userId || !userName || !userRole) { window.location.href = 'connexion.html'; return; }
-
-    // **MODIFIÉ** : Mettre à jour les nouveaux éléments d'affichage du profil
-    document.getElementById('user-name-display').textContent = userName;
-    document.getElementById('user-role-display').textContent = `Rôle : ${userRole}`;
+    document.getElementById('welcome-message').textContent = `Bienvenue, ${userName} (${userRole})`;
 
     // --- 2. Affichage conditionnel des sections pour les modérateurs ---
     const creationAnnonceSection = document.getElementById('creation-annonce-section');
@@ -95,11 +96,13 @@ window.addEventListener('load', () => {
                 auteurId: userId,
                 roleDemandeur: userRole
             };
+
             if (!coursData.module) {
                 messageElement.textContent = "Veuillez sélectionner un module.";
                 messageElement.style.color = 'red';
                 return;
             }
+
             try {
                 const response = await fetch('/api/cours/creer', {
                     method: 'POST',
